@@ -1,17 +1,25 @@
 ﻿var Router =
-	{
-		//This router is incredibly simple, in reality use a proper one like backbones router. This one doesnt support things like back, you need to implement window.onpopstate if you want it
-		goToThing: function (thing, e) {
-			React.render(React.createElement(Detail, { thingId: thing.Id, thing: thing }), document.getElementById("application-mount-node"));
-			window.history.pushState(thing, thing.Title, "/thing/detail/" + thing.Id);
-			e.preventDefault();
-		},
-		goToList: function (e) {
-			React.render(React.createElement(List, {}), document.getElementById("application-mount-node"));
-			window.history.pushState({}, 'list', "/thing/list");
-			e.preventDefault();
-		}
-	};//fake router for the demo
+{
+	//This router is incredibly simple, in reality use a proper one like backbones router.
+	goToThing: function (thing, e) {
+		React.render(React.createElement(Detail, { thingId: thing.Id, thing: thing }), document.getElementById("application-mount-node"));
+		window.history.pushState(thing, thing.Title, "/thing/detail/" + thing.Id);
+		e.preventDefault();
+	},
+	goToList: function (e) {
+		React.render(React.createElement(List, {}), document.getElementById("application-mount-node"));
+		window.history.pushState({}, 'list', "/thing/list");
+		e.preventDefault();
+	}
+};//fake router for the demo
+
+try {
+	//making back go by doing a full reload, (try catch because window is not defined when react runs).
+	window.onpopstate = function () {
+		window.location.reload();
+	}
+}
+catch (e) { }
 
 var List = React.createClass({
 	componentWillMount: function () {
