@@ -1,0 +1,4 @@
+﻿@model IEnumerable<SeoFriendlySinglePageApp.Controllers.Thing>
+@using React.Web.Mvc;
+
+@Html.React("List", new { things = Model }, containerId: "application-mount-node")

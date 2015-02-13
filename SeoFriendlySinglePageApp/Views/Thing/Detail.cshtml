@@ -1,0 +1,4 @@
+﻿@model SeoFriendlySinglePageApp.Controllers.Thing
+@using React.Web.Mvc;
+
+@Html.React("Detail", new { thingId = Model.Id, thing = Model }, containerId: "application-mount-node")
